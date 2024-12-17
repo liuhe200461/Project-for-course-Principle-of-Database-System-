@@ -53,6 +53,12 @@ auto ExtendibleHashTable<K, V>::Find(const K &key, V &value) -> bool {
   return dir_[index]->Find(key, value); // 在对应桶中查找
 }
 
+// 增加桶的局部深度
+template <typename K, typename V>
+void ExtendibleHashTable<K, V>::Bucket::IncrementDepth() {
+  depth_++; // 增加桶的深度
+}
+
 // 插入键值对到哈希表中
 template <typename K, typename V>
 void ExtendibleHashTable<K, V>::Insert(const K &key, const V &value) {
@@ -80,7 +86,6 @@ void ExtendibleHashTable<K, V>::Insert(const K &key, const V &value) {
     }
 
     // 提升桶的深度并创建新桶
-    void IncrementDepth() { depth_++; }
     bucket->IncrementDepth();
     auto new_bucket = std::make_shared<Bucket>(bucket_size_, bucket->GetDepth());
     num_buckets_++; // 增加桶的数量
