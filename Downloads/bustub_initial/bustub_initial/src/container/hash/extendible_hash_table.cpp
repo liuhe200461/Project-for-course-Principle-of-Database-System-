@@ -53,12 +53,6 @@ auto ExtendibleHashTable<K, V>::Find(const K &key, V &value) -> bool {
   return dir_[index]->Find(key, value); // 在对应桶中查找
 }
 
-// 增加桶的局部深度
-template <typename K, typename V>
-void ExtendibleHashTable<K, V>::Bucket::IncrementDepth() {
-  depth_++; // 增加桶的深度
-}
-
 // 插入键值对到哈希表中
 template <typename K, typename V>
 void ExtendibleHashTable<K, V>::Insert(const K &key, const V &value) {
