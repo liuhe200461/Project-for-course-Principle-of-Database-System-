@@ -80,6 +80,7 @@ void ExtendibleHashTable<K, V>::Insert(const K &key, const V &value) {
     }
 
     // 提升桶的深度并创建新桶
+    void IncrementDepth() { depth_++; }
     bucket->IncrementDepth();
     auto new_bucket = std::make_shared<Bucket>(bucket_size_, bucket->GetDepth());
     num_buckets_++; // 增加桶的数量
